@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const services = [
     {
@@ -21,11 +21,49 @@ const services = [
     }
 ];
 
+const TiltCard = ({ children, className }) => {
+    const [transform, setTransform] = useState('');
+    const [transition, setTransition] = useState('transform 0.1s ease-out');
+
+    const handleMouseMove = (e) => {
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Calculate rotation
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
+        setTransition('transform 0.1s ease-out');
+    };
+
+    const handleMouseLeave = () => {
+        setTransform('perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
+        setTransition('transform 0.5s ease-out');
+    };
+
+    return (
+        <div
+            className={className}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transform, transition }}
+        >
+            {children}
+        </div>
+    );
+};
+
 const Services = () => {
     return (
         <section id="services" className="section services-section container">
             <div className="section-header">
-                <h2 className="section-title">Nos Services</h2>
+                <h2 className="section-title">Nos <span>Services</span></h2>
                 <p className="section-subtitle">
                     Des solutions adaptées à chaque étape de votre croissance numérique.
                 </p>
@@ -33,7 +71,7 @@ const Services = () => {
 
             <div className="services-grid">
                 {services.map((service, index) => (
-                    <div key={index} className="service-card">
+                    <TiltCard key={index} className="service-card">
                         <div className="service-icon">{service.icon}</div>
                         <h3 className="service-title">{service.title}</h3>
                         <p className="service-desc">{service.description}</p>
@@ -45,7 +83,7 @@ const Services = () => {
                         <a href="#contact" className="btn btn-outline" style={{ width: '100%', textAlign: 'center' }}>
                             En savoir plus
                         </a>
-                    </div>
+                    </TiltCard>
                 ))}
             </div>
         </section>
