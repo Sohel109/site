@@ -1,14 +1,14 @@
 import React from 'react';
 
 const technologies = [
-    { name: 'React', icon: '⚛️' },
-    { name: 'Vite', icon: '⚡' },
-    { name: 'JavaScript', icon: '📜' },
-    { name: 'HTML5', icon: '🌐' },
-    { name: 'CSS3', icon: '🎨' },
-    { name: 'Node.js', icon: '🟢' },
-    { name: 'Git', icon: '📦' },
-    { name: 'Figma', icon: '🖌️' }
+    { name: 'JavaScript', icon: '/assets/logos/js.png', type: 'image' },
+    { name: 'HTML5', icon: '/assets/logos/html.png', type: 'image' },
+    { name: 'CSS3', icon: '/assets/logos/css.png', type: 'image' },
+    { name: 'Figma', icon: '/assets/logos/figma.png', type: 'image' },
+    { name: 'Vite', icon: '/assets/logos/vite.png', type: 'image' },
+    { name: 'React', icon: '⚛️', type: 'text' },
+    { name: 'Node.js', icon: '🟢', type: 'text' },
+    { name: 'Git', icon: '📦', type: 'text' }
 ];
 
 const TechStack = () => {
@@ -22,7 +22,11 @@ const TechStack = () => {
                     {/* Double the list for seamless loop */}
                     {[...technologies, ...technologies, ...technologies].map((tech, index) => (
                         <div key={index} className="tech-item">
-                            <span className="tech-icon">{tech.icon}</span>
+                            {tech.type === 'image' ? (
+                                <img src={tech.icon} alt={tech.name} className="tech-icon-img" />
+                            ) : (
+                                <span className="tech-icon">{tech.icon}</span>
+                            )}
                             <span className="tech-name">{tech.name}</span>
                         </div>
                     ))}
