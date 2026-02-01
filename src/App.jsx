@@ -5,12 +5,10 @@ import Services from './components/Services';
 
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import MouseFollower from './components/MouseFollower';
 
 function App() {
   return (
     <div className="app">
-      <MouseFollower />
       <Header />
       <main>
         <Hero />

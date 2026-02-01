@@ -178,24 +178,6 @@
     }
 }
 
-/* Mouse Follower */
-.mouse-follower {
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, transparent 60%);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    transition: opacity 0.3s ease;
-    mix-blend-mode: screen;
-}
-
-.mouse-follower.hidden {
-    opacity: 0;
-}
-
 
 /* Services */
 .services-section {
